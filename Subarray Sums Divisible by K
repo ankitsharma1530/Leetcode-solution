@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& A, int K) {
+        
+        unordered_map<int,int> map;
+        map[0] = 1;
+        int sum=0;
+        int count=0;
+        
+        for (int i=0;i<A.size();i++) {
+            sum += A[i];
+            int modulo = ((sum % K) + K) % K;  
+            if (map.count(modulo)>0) {
+                count += map[modulo];
+            }
+            map[modulo] += 1;
+        }
+        return count;
+    }
+};
